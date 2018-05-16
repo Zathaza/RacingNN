@@ -17,6 +17,8 @@ var config = {
     }
 };
 
+var NNoutput = [0, 0]; // NNoutput[0]: turn, NNoutput[1]: accelerate
+
 var sensorStraight;
 var sensorLeft;
 var sensorRight;
@@ -261,10 +263,10 @@ function update ()
         accelerate = -0.25;
     }
 
-    /*var NNoutput = NN(distStraight, distLeft, distRight, counter);
+    var NNoutput = NN(distStraight, distLeft, distRight, counter);
     turn = NNoutput[0];
     accelerate = NNoutput[1];
-    */
+    
 
     if (car.body.velocity.x > 0 && car.body.velocity.y < 0)
     {
