@@ -38,9 +38,9 @@ var leftX;
 var leftY;
 var rightX;
 var rightY;
-var distStraight;
-var distLeft;
-var distRight;
+var distStraight = 0;
+var distLeft = 0;
+var distRight = 0;
 
 var counter = 0; // 0 to 19
 var scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -113,6 +113,10 @@ function sensorRightPos()
     sensorRight.body.position.x = car.body.position.x;
     sensorRight.body.position.y = car.body.position.y;
     sensorRight.setAngle(210 - currentDirection);
+    distRight = Math.sqrt(Math.pow((car.body.position.x - rightX), 2) + Math.pow((car.body.position.y - rightY), 2));
+    NNoutput = NNact();
+    turn = NNoutput[0];
+    accelerate = NNoutput[1];
     sensorRightVel();
 }
 
@@ -153,6 +157,10 @@ function sensorLeftPos()
     sensorLeft.body.position.x = car.body.position.x;
     sensorLeft.body.position.y = car.body.position.y;
     sensorLeft.setAngle(150 - currentDirection);
+    distLeft = Math.sqrt(Math.pow((car.body.position.x - leftX), 2) + Math.pow((car.body.position.y - leftY), 2));
+    NNoutput = NNact();
+    turn = NNoutput[0];
+    accelerate = NNoutput[1];
     sensorLeftVel();
 }
 
@@ -188,11 +196,16 @@ function sensorLeftVel()
 function sensorStraightPos()
 {
     //sensorStraight.setVelocity(500);
+
     straightX = sensorStraight.body.position.x;
     straightY = sensorStraight.body.position.y;
     sensorStraight.body.position.x = car.body.position.x;
     sensorStraight.body.position.y = car.body.position.y;
     sensorStraight.setAngle(180 - currentDirection);
+    distStraight = Math.sqrt(Math.pow((car.body.position.x - straightX), 2) + Math.pow((car.body.position.y - straightY), 2));
+    NNoutput = NNact();
+    turn = NNoutput[0];
+    accelerate = NNoutput[1];
     sensorStraightVel();
 }
 
@@ -227,9 +240,6 @@ function sensorStraightVel()
 
 function update ()
 {
-    distStraight = Math.sqrt(Math.pow((car.body.position.x - straightX), 2) + Math.pow((car.body.position.y - straightY), 2));
-    distLeft = Math.sqrt(Math.pow((car.body.position.x - leftX), 2) + Math.pow((car.body.position.y - leftY), 2));
-    distRight = Math.sqrt(Math.pow((car.body.position.x - rightX), 2) + Math.pow((car.body.position.y - rightY), 2));
 
     if (cursors.left.isDown)
     {
@@ -263,10 +273,8 @@ function update ()
         accelerate = -0.25;
     }
 
-    var NNoutput = NN(distStraight, distLeft, distRight, counter);
     turn = NNoutput[0];
     accelerate = NNoutput[1];
-    
 
     if (car.body.velocity.x > 0 && car.body.velocity.y < 0)
     {
@@ -303,9 +311,12 @@ function update ()
 
     turnAngle = (currentDirection + turn * maxTurn) % 360;
     currentVelocity = Math.sqrt(car.body.velocity.x * car.body.velocity.x + car.body.velocity.y * car.body.velocity.y);
-    /*console.log("x velocity", car.body.velocity.x);
-    console.log("y velocity", car.body.velocity.y);
-    console.log(currentDirection);*/
+
+    console.log("turn", NNoutput[0]);
+    console.log("accel", NNoutput[1]);
+    /*console.log("straight", distStraight);
+    console.log("left", distLeft);
+    console.log("right", distRight);*/
 
  //   accelerate();
 
