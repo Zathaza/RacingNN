@@ -1,0 +1,1 @@
+sometimes NNoutput[1] is < 0 ... --> accelerate too, but no the same amount...... how/why

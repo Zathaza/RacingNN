@@ -11,14 +11,11 @@ function NNact()
     tdistRight = distRight/450;
     NNoutput = genome.activate([tdistStraight, tdistLeft, tdistRight]);
 
-    NNoutput[0] = (NNoutput[0] - 0.5) * 2; //turn
+    NNoutput[0] = (NNoutput[0] - 0.5) * 2; //turn from -1 to 1
+
+    NNoutput[1] = (NNoutput[1] + 0.24) * 0.83; // accelerate from 0.2 to 1
 
     return NNoutput;
-}
-
-function evolution(scores)
-{
-    
 }
 
 
@@ -37,9 +34,14 @@ function initNeat(){
         popsize: 10,
         mutationRate: 0.3,
         elitism: 3,
-        network: new neataptic.architect.Perceptron(3, 5, 2)
+        network: new neataptic.architect.Random(3, 15, 2)
       }
     );
+
+    for (var x=0; x<100; x++)
+    {
+      neat.mutate();
+    }
   
     if(USE_TRAINED_POP) neat.population = population;
   }
@@ -51,14 +53,14 @@ function initNeat(){
   }
   
   /** End the evaluation of the current generation */
-  function endEvaluation(){
+  function evolution(){
     console.log('Generation:', neat.generation);
 
     var newPopulation = [];
   
     // Elitism
     for(var i = 0; i < neat.elitism; i++){
-      newPopulation.push(neat.population[i]);
+      newPopulation.push(neat.population[sorted[i]]);
     }
   
     // Breed the next individuals
