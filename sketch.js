@@ -43,7 +43,7 @@ var distLeft = 0;
 var distRight = 0;
 
 var counter = 0; // 0 to 19
-var scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 var game = new Phaser.Game(config);
 
@@ -56,6 +56,9 @@ function preload ()
 
 function create()
 {
+    initNeat();
+    nextGenome();
+
     //car
 
     car = new Car();
@@ -312,8 +315,6 @@ function update ()
     turnAngle = (currentDirection + turn * maxTurn) % 360;
     currentVelocity = Math.sqrt(car.body.velocity.x * car.body.velocity.x + car.body.velocity.y * car.body.velocity.y);
 
-    console.log("turn", NNoutput[0]);
-    console.log("accel", NNoutput[1]);
     /*console.log("straight", distStraight);
     console.log("left", distLeft);
     console.log("right", distRight);*/
@@ -365,14 +366,27 @@ function score()
     scores[counter] = currScore;
 }
 
+function scoring()
+{
+    //scores current run
+}
+
+function sorting()
+{
+    //uses scores[] to sort the sorted[] array
+}
+
 function win()
 {
     //yai
-    score();
+    scoring();
     counter++;
-    if (counter >= 20)
+    console.log("car: ", counter);
+    if (counter >= 10)
     {
+        sorting();
         counter = 0;
+        endEvaluation(); //makes next gen
         //evolution(scores);
     }
     car.body.position.x = 100;
@@ -380,16 +394,20 @@ function win()
     car.body.velocity.x = 0;
     car.body.velocity.y = 0;
     currentDirection = 0;
+    nextGenome();
 }
 
 function lose() 
 {
     //nai
-    score();
+    scoring();
     counter++;
-    if (counter >= 20)
+    console.log("car: ", counter);
+    if (counter >= 10)
     {
+        sorting();
         counter = 0;
+        endEvaluation(); //makes next gen
         //evolution(scores);
     }
     car.body.position.x = 100;
@@ -397,4 +415,5 @@ function lose()
     car.body.velocity.x = 0;
     car.body.velocity.y = 0;
     currentDirection = 0;
+    nextGenome();
 }

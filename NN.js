@@ -1,15 +1,15 @@
-var myNetwork = neataptic.architect.Perceptron(3, 5, 2);
-
 var USE_TRAINED_POP = 0;
+var genome;
+//var myNetwork = neataptic.architect.Perceptron(3, 5, 2);
 
 function NNact() 
 {
      // NNoutput[0]: turn, NNoutput[1]: accelerate
-     myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
+     //myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
     tdistStraight = distStraight/450;
     tdistLeft = distLeft/450;
     tdistRight = distRight/450;
-    NNoutput = myNetwork.activate([tdistStraight, tdistLeft, tdistRight]);
+    NNoutput = genome.activate([tdistStraight, tdistLeft, tdistRight]);
 
     NNoutput[0] = (NNoutput[0] - 0.5) * 2; //turn
 
@@ -26,17 +26,16 @@ function evolution(scores)
 
 
 
-
 /** Construct the genetic algorithm */
 function initNeat(){
-    neat = new Neat(
-      1 + PLAYER_DETECTION * 3 + FOOD_DETECTION * 2,
+    neat = new neataptic.Neat(
+      3,
       2,
       null,
       {
-        mutation: neataptic.methods.mutation.MOD_WEIGHT,
+        mutation: neataptic.methods.mutation.ALL,
         popsize: 10,
-        mutationRate: 1,
+        mutationRate: 0.3,
         elitism: 3,
         network: new neataptic.architect.Perceptron(3, 5, 2)
       }
@@ -46,21 +45,15 @@ function initNeat(){
   }
   
   /** Start the evaluation of the current generation */
-  function startEvaluation(){
-    players = [];
-    highestScore = 0;
+  function nextGenome(){
   
-    for(var genome in neat.population){
-      genome = neat.population[genome];
-      new Player(genome);
-    }
+    genome = neat.population[counter];
   }
   
   /** End the evaluation of the current generation */
   function endEvaluation(){
-    console.log('Generation:', neat.generation, '- average score:', neat.getAverage());
-  
-    neat.sort();
+    console.log('Generation:', neat.generation);
+
     var newPopulation = [];
   
     // Elitism
@@ -78,7 +71,6 @@ function initNeat(){
     neat.mutate();
   
     neat.generation++;
-    startEvaluation();
   }
 
   

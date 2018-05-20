@@ -2997,7 +2997,7 @@ Neat.prototype = {
       if (Math.random() <= this.mutationRate) {
         for (var j = 0; j < this.mutationAmount; j++) {
           var mutationMethod = this.selectMutationMethod(this.population[i]);
-          this.population[i].mutate(mutationMethod);
+          this.population[i].mutate(methods.mutation.MOD_WEIGHT);
         }
       }
     }
