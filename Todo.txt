@@ -1,1 +1,6 @@
-sometimes NNoutput[1] is < 0 ... --> accelerate too, but no the same amount...... how/why
+--SOLVED: sometimes NNoutput[1] is < 0 ... --> accelerate too, but not the same amount...... how/why ? solved: mutation changed activation function
+
+--make a new much larger map
+
+--multiple cars at once (at least 2 with hardcoding (double the speed <3), or 10 with oop.. but idk how)
+        --> prob rewrite A LOT to do it with class car

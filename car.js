@@ -7,5 +7,6 @@ class Car
         this.acc = 0;
         this.vel = 0;
         this.dir = 0;
+        this.counter = 0;
     }
 }
