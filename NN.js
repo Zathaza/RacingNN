@@ -105,10 +105,10 @@ function evolution(){
   var newPopulation = [];
   var tempPop = []
   //sort pop
-  for(var i = 0; i < neat.popsize; i++){
+  /*for(var i = 0; i < neat.popsize; i++){
     tempPop[i] = neat.population[sorted[i]];
   }
-  neat.population = tempPop;
+  neat.population = tempPop;*/
 
   // Elitism
   for(var i = 0; i < neat.elitism; i++){
