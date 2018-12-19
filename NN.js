@@ -53,23 +53,13 @@ function NNact(dS, dL, dR, cNr)
         tdistLeft = 0.5;
       }
     }
+
     var tempOutput;
-    if (cNr == 0) {
-      tempOutput = genome.activate([tdistStraight, tdistLeft, tdistRight]);
-      tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
-      tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
-
-      NNoutput[0][0] = tempOutput[0];
-      NNoutput[1][0] = tempOutput[1];
-    }
-    else if (cNr == 1) {
-      tempOutput = genome1.activate([tdistStraight, tdistLeft, tdistRight]);
-      tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
-      tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
-
-      NNoutput[0][1] = tempOutput[0];
-      NNoutput[1][1] = tempOutput[1];
-    }
+    tempOutput = genomes[cNr].activate([tdistStraight, tdistLeft, tdistRight]);
+    tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
+    tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
+    NNoutput[cNr][0] = tempOutput[0];
+    NNoutput[cNr][1] = tempOutput[1];
 
     return NNoutput;
 }
@@ -94,26 +84,31 @@ function initNeat(){
     }
   );
 
-  for (var x=0; x<100; x++)
-  {
+  for (var x=0; x<100; x++){
     neat.mutate();
   }
 
   if(USE_TRAINED_POP) neat.population = population;
 }
-  
-function nextGenome(){
-  genome = neat.population[counter];
+
+function nextGenome(o){
+  genomes[o] = neat.population[counter];
 }
 
-function nextGenome1(){
+/*function nextGenome1(){
   genome1 = neat.population[counter];
-}
+}*/
   
 function evolution(){
   console.log('Generation:', neat.generation);
 
   var newPopulation = [];
+  var tempPop = []
+  //sort pop
+  /*for(var i = 0; i < neat.popsize; i++){
+    tempPop[i] = neat.population[sorted[i]];
+  }
+  neat.population = tempPop;*/
 
   // Elitism
   for(var i = 0; i < neat.elitism; i++){

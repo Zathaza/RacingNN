@@ -1,6 +1,14 @@
---SOLVED: sometimes NNoutput[1] is < 0 ... --> accelerate too, but not the same amount...... how/why ? solved: mutation changes activation function
-
+TODO:
 --new map
 
---multiple cars at once
-        --> rewrite A LOT to do it with class car
+
+BUGS:
+
+--training doesnt work.. almost seems like it minimises peformance..  maybe evolution is fucked
+        sometimes there will be a good car and it wont be in the next generation even though elitism should preserve it
+        this is only since the last update (10 cars update)
+
+--sometimes cars go missing and i suddenly only have 2-3 ...  cars come back after many generations
+
+--sometimes it just stops as if there is a car moving somewhere that isnt done, but there is none -- in this case counter was == 18 :( how ?
+        could be connected to previous bug
