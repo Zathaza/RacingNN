@@ -169,7 +169,7 @@ function initNeat(){
 }*/
 
 function nextGenome(){
-  genome = neat.population[counter];
+  genomes[counter] = neat.population[counter];
 }
 
 function nextGenome1(){
