@@ -652,8 +652,8 @@ function update ()
 function accelerateCars(p)
 {
     //p: car number
-    turnData[p] = NNoutput[p][0];
-    accelerateData[p] = NNoutput[p][1];
+    turnData[p] = NNoutput[0][p];
+    accelerateData[p] = NNoutput[1][p];
 
     if (cars[p].body.velocity.x > 0 && cars[p].body.velocity.y < 0)
     {

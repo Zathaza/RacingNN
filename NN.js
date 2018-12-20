@@ -4,7 +4,7 @@ var genome1;
 //var myNetwork = neataptic.architect.Perceptron(3, 5, 2);
 
 //for car array (sketch.js)
-/*function NNact(dS, dL, dR, cNr) 
+function NNact(dS, dL, dR, cNr) 
 {
      // NNoutput[0]: turn, NNoutput[1]: accelerate
      //myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
@@ -59,13 +59,13 @@ var genome1;
     tempOutput = genomes[cNr].activate([tdistStraight, tdistLeft, tdistRight]);
     tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
     tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
-    NNoutput[cNr][0] = tempOutput[0];
-    NNoutput[cNr][1] = tempOutput[1];
+    NNoutput[0][cNr] = tempOutput[0];
+    NNoutput[1][cNr] = tempOutput[1];
 
     return NNoutput;
-}*/
+}
 
-function NNact(dS, dL, dR, cNr) 
+/*function NNact(dS, dL, dR, cNr) 
 {
      // NNoutput[0]: turn, NNoutput[1]: accelerate
      //myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
@@ -134,7 +134,7 @@ function NNact(dS, dL, dR, cNr)
     }
 
     return NNoutput;
-}
+}*/
 
 
 
@@ -170,12 +170,10 @@ function initNeat(){
 
 function nextGenome(){
   genome = neat.population[counter];
-  console.log('Giving Car the ', counter, '. car in the current Population');
 }
 
 function nextGenome1(){
   genome1 = neat.population[counter];
-  console.log('Giving Car1 the ', counter, '. car in the current Population');
 }
   
 function evolution(){
