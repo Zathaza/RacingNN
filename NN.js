@@ -164,17 +164,17 @@ function initNeat(){
 }
 
 //for car array (sketch.js)
-/*function nextGenome(o){
+function nextGenome(o){
   genomes[o] = neat.population[counter];
-}*/
+}
 
-function nextGenome(){
-  genomes[counter] = neat.population[counter];
+/*function nextGenome(){
+  genome = neat.population[counter];
 }
 
 function nextGenome1(){
   genome1 = neat.population[counter];
-}
+}*/
   
 function evolution(){
   console.log('Generation:', neat.generation);
