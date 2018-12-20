@@ -91,13 +91,17 @@ function initNeat(){
   if(USE_TRAINED_POP) neat.population = population;
 }
 
-function nextGenome(o){
+/*function nextGenome(o){
   genomes[o] = neat.population[counter];
+}*/
+
+function nextGenome(){
+  genome = neat.population[counter];
 }
 
-/*function nextGenome1(){
+function nextGenome1(){
   genome1 = neat.population[counter];
-}*/
+}
   
 function evolution(){
   console.log('Generation:', neat.generation);

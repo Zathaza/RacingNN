@@ -12,3 +12,6 @@ BUGS:
 
 --sometimes it just stops as if there is a car moving somewhere that isnt done, but there is none -- in this case counter was == 18 :( how ?
         could be connected to previous bug
+--SOLVED: sometimes NNoutput[1] is < 0 ... --> accelerate too, but not the same amount...... how/why ? solved: mutation changed activation function
+
+--make a new much larger map

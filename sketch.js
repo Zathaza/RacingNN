@@ -291,9 +291,9 @@ function create()
     }
 
     //init sensorData[carNr][left/straight/right]
-    for (var hada=0; hada<carNr; hada++)
+    for (var x=0; x<carNr; x++)
     {
-        sensorData[hada] = [];
+        sensorData[x] = [];
     }
 
     for (var x=0; x<carNr; x++)
