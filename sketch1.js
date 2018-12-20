@@ -646,6 +646,7 @@ function acceleration1()
 function acceleration()
 {
     turn = NNoutput[0][0];
+    console.log('turn= ', turn);
     //accelerate = NNoutput[1][0];
     accelerate = 0.5;
 
