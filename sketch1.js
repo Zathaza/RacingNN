@@ -558,7 +558,7 @@ function update ()
 function acceleration1()
 {
     turn1 = NNoutput[0][1];
-    console.log('turn1= ', turn1);
+    //console.log('turn1= ', turn1);
     //accelerate1 = NNoutput[1][1];
     accelerate1 = 0.5;
 
@@ -646,7 +646,7 @@ function acceleration1()
 function acceleration()
 {
     turn = NNoutput[0][0];
-    console.log('turn= ', turn);
+    //console.log('turn= ', turn);
     //accelerate = NNoutput[1][0];
     accelerate = 0.5;
 
