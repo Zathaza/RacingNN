@@ -558,7 +558,8 @@ function update ()
 function acceleration1()
 {
     turn1 = NNoutput[0][1];
-    accelerate1 = NNoutput[1][1];
+    //accelerate1 = NNoutput[1][1];
+    accelerate1 = 0.5;
 
     if (car1.body.velocity.x > 0 && car1.body.velocity.y < 0)
     {
@@ -643,7 +644,8 @@ function acceleration1()
 function acceleration()
 {
     turn = NNoutput[0][0];
-    accelerate = NNoutput[1][0];
+    //accelerate = NNoutput[1][0];
+    accelerate = 0.5;
 
     if (car.body.velocity.x > 0 && car.body.velocity.y < 0)
     {
