@@ -3,7 +3,7 @@ var genome;
 var genome1;
 //var myNetwork = neataptic.architect.Perceptron(3, 5, 2);
 
-function NNact(dS, dL, dR, cNr) 
+/*function NNact(dS, dL, dR, cNr) 
 {
      // NNoutput[0]: turn, NNoutput[1]: accelerate
      //myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
@@ -60,6 +60,77 @@ function NNact(dS, dL, dR, cNr)
     tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
     NNoutput[cNr][0] = tempOutput[0];
     NNoutput[cNr][1] = tempOutput[1];
+
+    return NNoutput;
+}*/
+
+function NNact(dS, dL, dR, cNr) 
+{
+     // NNoutput[0]: turn, NNoutput[1]: accelerate
+     //myNetwork.mutate(neataptic.methods.mutation.MOD_WEIGHT);
+    tdistStraight = dS/450;
+    tdistLeft = dL/450;
+    tdistRight = dR/450;
+
+    if (tdistStraight > tdistLeft && tdistStraight > tdistRight)
+    {
+      tdistStraight = 1;
+      if (tdistLeft > tdistRight)
+      {
+        tdistLeft = 0.5;
+        tdistRight = 0;
+      }
+      else
+      {
+        tdistLeft = 0;
+        tdistRight = 0.5;
+      }
+    }
+    else if (tdistLeft > tdistStraight && tdistLeft > tdistRight)
+    {
+      tdistLeft = 1;
+      if (tdistStraight > tdistRight)
+      {
+        tdistStraight = 0.5;
+        tdistRight = 0;
+      }
+      else
+      {
+        tdistStraight = 0;
+        tdistRight = 0.5;
+      }
+    }
+    else
+    {
+      tdistRight = 1;
+      if (tdistStraight > tdistLeft)
+      {
+        tdistStraight = 0.5;
+        tdistLeft = 0;
+      }
+      else
+      {
+        tdistStraight = 0;
+        tdistLeft = 0.5;
+      }
+    }
+
+    if (cNr == 0)
+    {
+      var tempOutput;
+      tempOutput = genome.activate([tdistStraight, tdistLeft, tdistRight]);
+      tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
+      tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
+      NNoutput[cNr][0] = tempOutput[0];
+      NNoutput[cNr][1] = tempOutput[1];
+    } else {
+      var tempOutput;
+      tempOutput = genome1.activate([tdistStraight, tdistLeft, tdistRight]);
+      tempOutput[0] = (tempOutput[0] - 0.5) * 2; //turn from -1 to 1
+      tempOutput[1] = (tempOutput[1] + 0.24) * 0.83; // accelerate from ~0.2 to ~1
+      NNoutput[cNr][0] = tempOutput[0];
+      NNoutput[cNr][1] = tempOutput[1];
+    }
 
     return NNoutput;
 }
