@@ -3,6 +3,7 @@ var genome;
 var genome1;
 //var myNetwork = neataptic.architect.Perceptron(3, 5, 2);
 
+//for car array (sketch.js)
 /*function NNact(dS, dL, dR, cNr) 
 {
      // NNoutput[0]: turn, NNoutput[1]: accelerate
@@ -162,6 +163,7 @@ function initNeat(){
   if(USE_TRAINED_POP) neat.population = population;
 }
 
+//for car array (sketch.js)
 /*function nextGenome(o){
   genomes[o] = neat.population[counter];
 }*/
