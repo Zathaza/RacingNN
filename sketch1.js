@@ -597,6 +597,7 @@ function acceleration1()
     turnAngle1 = (currentDirection1 + turn1 * maxTurn) % 360;
     currentVelocity1 = Math.sqrt(car1.body.velocity.x * car1.body.velocity.x + car1.body.velocity.y * car1.body.velocity.y);
     if (currentVelocity1 > 175) currentVelocity1 = 175;
+    if (currentVelocity1 < 25) currentVelocity1 = 25;
 
     /*console.log("straight", distStraight);
     console.log("left", distLeft);
@@ -683,6 +684,7 @@ function acceleration()
     turnAngle = (currentDirection + turn * maxTurn) % 360;
     currentVelocity = Math.sqrt(car.body.velocity.x * car.body.velocity.x + car.body.velocity.y * car.body.velocity.y);
     if (currentVelocity > 175) currentVelocity = 175;
+    if (currentVelocity < 25) currentVelocity = 25;
 
     /*console.log("straight", distStraight);
     console.log("left", distLeft);
